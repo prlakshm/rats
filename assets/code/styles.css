@@ -1,0 +1,52 @@
+.cheese-conveyor {
+    position: fixed;
+    bottom: 100px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    overflow: hidden; /* hide extra image overflow */
+    z-index: -1;
+}
+
+.conveyor-track {
+    display: flex;
+    width: max-content; /* allow track to expand as needed */
+    animation: conveyorMove 40s linear infinite;
+}
+
+.conveyor-track img {
+    height: 120px; /* match container height */
+    width: auto;   /* keep aspect ratio */
+}
+
+/* Animate track moving left continuously */
+@keyframes conveyorMove {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* move half of track */
+    }
+}
+
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+h1 {
+    font-family: "Rats";
+    font-size: 10rem;
+}
+
+
+@font-face {
+  font-family: "Rats";
+  src: url("../fonts/RatsVF.ttf") format("truetype");
+  font-weight: 0 100;
+  font-style: normal;
+}
+
