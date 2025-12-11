@@ -344,3 +344,15 @@ h1 {
     font-weight: 0 100;
     font-style: normal;
 }
+
+
+@media (max-width: 900px) {
+    .mouse-trap {
+        display: none; 
+    }
+
+    .download {
+    gap: 1rem;
+}
+
+}
