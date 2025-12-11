@@ -10,7 +10,7 @@
 
 <body>
     <div class="home">
-    <button class="btn">Try It Yourself!</button>
+    <a href="#try-it-section" class="btn">Try It Yourself!</a>
     <div class="title">
         <h1>RATS!</h1>
         <p>A title font where letters take on rat-forms.</p>
@@ -36,19 +36,100 @@
     </div>
     <div class="info">
         <div class="text">
-            <h2 class="auto-color">GAMES</h2>
-            <p class="auto-color">One source of inspiration was the hit 2000s game <span style="font-style: italic;">"Mouse Trap"</span>. Its retro vibe makes it perfect for video games.</p>
+            <h2>GAMES</h2>
+            <p>One source of inspiration was the hit 2000s game <span style="font-style: italic;">"Mouse Trap"</span>. Its retro vibe makes it perfect for video games.</p>
         </div>
         <div class="img-container"><img src="assets/images/mouse-trap.png" alt="Mouse Trap game from 2000s"></div>
         <div class="text">
-            <h2 class="auto-color">MOVIES</h2>
-            <p class="auto-color">Another inspiration was everyone's favorite rat movie, <span style="font-style: italic;">Ratatouille</span>. This font could also be used for movie posters and marketing campaigns. </p>
+            <h2>MOVIES</h2>
+            <p>Another inspiration was everyone's favorite rat movie, <span style="font-style: italic;">Ratatouille</span>. This font could also be used for movie posters and marketing campaigns. </p>
         </div>
         <div class="img-container"><img src="assets/images/movie-poster.jpg" style="height: 45vh;"   alt="Pixar Ratatouille Movie Poster"></div>
     </div>
     </div>
+    <div id="try-it-section" class="font-item">
+          <div class="font-controls">
+            <div class="download">
+                <p>Type Below!</p>
+                 <a href="assets/fonts/RatsVF.ttf" download class="btn-download">
+      Download
+    </a>
+            </div>
+            <input type="range" min="0" max="100" value="0" class="weight-slider" />
+          </div>
+          <div class="font-preview-wrapper">
+            <div class="font-preview" contenteditable="true">
+              ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,:;-!?/()'"
+            </div>
+          </div>
 
+        </div>
 
+        <div class="footer">
+        <p>© 2025 Coded with 💖 by Pranavi Lakshminarayanan</p>
+    </div>
+
+<script>
+    // Select all font items
+    const fontItems = document.querySelectorAll('.font-item');
+
+    fontItems.forEach((item) => {
+      const slider = item.querySelector('.weight-slider');
+      const preview = item.querySelector('.font-preview');
+
+      // Determine axis tag based on font class
+      let axis = "wght"; // default
+      if (preview.classList.contains('rats')) axis = "wght";
+      else if (preview.classList.contains('bloom')) axis = "BLOM";
+      else if (preview.classList.contains('bloom-black')) axis = "BLOM";
+      else if (preview.classList.contains('twinkle')) axis = "STAR";
+
+      // Listen to slider input and update axis value
+      slider.addEventListener('input', (event) => {
+        const value = event.target.value;
+        preview.style.fontVariationSettings = `"${axis}" ${value}`;
+      });
+    });
+
+    document.querySelectorAll('.font-preview').forEach(preview => {
+      const wrapper = preview.parentElement;
+      let originalText = preview.textContent;
+      let typingStarted = false;
+
+      preview.addEventListener('focus', () => {
+        // Dim the original text to 50% transparency placeholder
+        if (!typingStarted) {
+          preview.classList.add('placeholder');
+        }
+      });
+
+      preview.addEventListener('keydown', () => {
+        // On first key press, clear the text
+        if (!typingStarted) {
+          preview.textContent = '';
+          preview.classList.remove('placeholder');
+          typingStarted = true;
+        }
+      });
+
+      preview.addEventListener('blur', () => {
+        // If user leaves empty, restore original text
+        if (!preview.textContent.trim()) {
+          preview.textContent = originalText;
+          preview.classList.remove('placeholder');
+          preview.style.transform = `translateX(0px)`;
+          typingStarted = false;
+        }
+      });
+
+      preview.addEventListener('input', () => {
+        // Keep the scroll following the text x-overflow
+        const containerWidth = wrapper.offsetWidth;
+        const scrollAmount = Math.max(0, preview.scrollWidth - containerWidth);
+        preview.style.transform = `translateX(-${scrollAmount}px)`;
+      });
+    });
+    </script>
 </body>
 
 </html>
