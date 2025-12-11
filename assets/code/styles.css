@@ -210,7 +210,7 @@ h1 {
 .trap-cup {
     position: sticky;
     left: auto;
-    top: -5px;
+    top: 5%;
     height: 12.5rem;
     z-index: 3;
 }
